@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
- 
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -19,8 +19,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 
 ---@type vim.Option
-local rtp = vim.opt.rtp
-rtp:prepend(lazypath)
+local rtp = vim.opt.runtimepath:prepend(lazypath)
 
 local nvim_theme = 'onedark'
 
@@ -30,12 +29,12 @@ local themes = {
   onedark = 'plugins.themes.onedark',
 }
 
-require('lazy').setup({
+require('lazy').setup {
   require(themes[nvim_theme]),
   require 'plugins.neo-tree',
+  require 'plugins.lsp',
+  require 'plugins.conform',
   require 'plugins.telescope',
   require 'plugins.treesitter',
-  -- require 'plugins.mini',
-})
-
-
+  require 'plugins.mini',
+}
